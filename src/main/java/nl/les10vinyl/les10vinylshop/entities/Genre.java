@@ -1,5 +1,6 @@
 package nl.les10vinyl.les10vinylshop.entities;
 
+
 public class Genre {
     /**
      * Dit is een mock-model voor de Genre.
