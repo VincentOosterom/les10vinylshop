@@ -9,6 +9,7 @@ public class BaseEntity {
     @Id
     @GeneratedValue
     private Long id;
+
     @Column(nullable = false)
     private LocalDateTime createDate;
     private LocalDateTime editDate;
@@ -23,10 +24,6 @@ public class BaseEntity {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public LocalDateTime getCreateDate() {
