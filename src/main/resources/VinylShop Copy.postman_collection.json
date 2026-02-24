@@ -1,0 +1,91 @@
+{
+	"info": {
+		"_postman_id": "e7967ac0-fe84-404f-9aba-b313c035edb1",
+		"name": "VinylShop Copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44626698",
+		"_collection_link": "https://vincent-4709236.postman.co/workspace/Vincent's-Workspace~18587773-a63d-412a-8059-678b7c3902c0/collection/44626698-e7967ac0-fe84-404f-9aba-b313c035edb1?action=share&source=collection_link&creator=44626698"
+	},
+	"item": [
+		{
+			"name": "Create Genre",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"{{$randomFirstName}}\",\n    \"lastName\": \"{{$randomLastName}}\",\n    \"createdAt\": \"{{$isoTimestamp}}\",\n    \"address\": {\n        \"line1\": \"{{$randomStreetAddress}}\",\n        \"line2\": \"{{$randomCity}}\",\n        \"country\": \"{{$randomCountryCode}}\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/post",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"post"
+					]
+				},
+				"description": "This request shows an example of generating mock user data in the request body. You can use this to populate some users for testing your API or application, or to ensure that your API accepts a range of inputs within certain parameters."
+			},
+			"response": []
+		},
+		{
+			"name": "Create Publisher",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": \"{{$guid}}\",\n    \"payment\": {\n        \"cardNumber\": \"{{$randomCreditCardMask}}\",\n        \"currency\": \"{{$randomCurrencyCode}}\",\n        \"amount\": {{$randomInt}},\n        \"confirmed\": \"{{$randomBoolean}}\",\n        \"confirmedAt\": \"{{$isoTimestamp}}\"\n    },\n    \"basket\": [\n        {\n            \"id\": \"{{$guid}}\",\n            \"quantity\": {{$randomInt}}\n        },\n        {\n            \"id\": \"{{$guid}}\",\n            \"quantity\": {{$randomInt}}\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/post",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"post"
+					]
+				},
+				"description": "This request shows an example of generating mock purchase details in the request body. It demonstrates a few finance-related dynamic variables, in addition to the ones for random ID, Integer, Boolean, and Timestamp."
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://postman-echo.com"
+		}
+	]
+}

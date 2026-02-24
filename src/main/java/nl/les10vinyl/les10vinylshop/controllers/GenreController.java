@@ -1,11 +1,10 @@
 package nl.les10vinyl.les10vinylshop.controllers;
 
-import nl.les10vinyl.les10vinylshop.entities.Genre;
+import nl.les10vinyl.les10vinylshop.entities.GenreEntity;
 import nl.les10vinyl.les10vinylshop.services.GenreService;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 
@@ -16,27 +15,31 @@ import java.util.List;
 public class GenreController {
 
     private final GenreService genreService;
+
     public GenreController(GenreService genreService) {
         this.genreService = genreService;
     }
 
     // GET one
     @GetMapping("/{id}")
-    public ResponseEntity<Genre>getGenreById(@PathVariable Long id) {
-        Genre genre = genreService.findGenreById(id);
+    public ResponseEntity<GenreEntity> getGenreById(@PathVariable Long id) {
+        GenreEntity genre = genreService.findGenreById(id);
+        if (genre == null) {
+            return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(genre);
     }
 
     // GET all
     @GetMapping
-    public ResponseEntity<List<Genre>> getAllGenres() {
+    public ResponseEntity<List<GenreEntity>> getAllGenres() {
         return ResponseEntity.ok(genreService.findAllGenres());
     }
 
     // POST
     @PostMapping
-    public ResponseEntity<Genre> createGenre(@RequestBody Genre genre) {
-        Genre created = genreService.createGenre(genre);
+    public ResponseEntity<GenreEntity> createGenre(@RequestBody GenreEntity genre) {
+        GenreEntity created = genreService.createGenre(genre);
 
         URI location = URI.create("/genres/" + created.getId());
 
@@ -47,8 +50,8 @@ public class GenreController {
 
     // PUT
     @PutMapping("/{id}")
-    public ResponseEntity<Genre> updateGenre(@PathVariable Long id, @RequestBody Genre genre) {
-        Genre updated = genreService.updateGenre(id, genre);
+    public ResponseEntity<GenreEntity> updateGenre(@PathVariable Long id, @RequestBody GenreEntity genre) {
+        GenreEntity updated = genreService.updateGenre(id, genre);
         return ResponseEntity.ok(updated);
     }
 
